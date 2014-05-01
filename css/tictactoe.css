@@ -1,0 +1,18 @@
+body {
+ background-image: linear-gradient(to bottom right, #000000 0%, #394745 100%);
+ background-image: -webkit-linear-gradient(top left, #000000 0%, #394745 100%);
+ background-image: -moz-linear-gradient(top left, #000000 0%, #394745 100%);
+ background-image: -ms-linear-gradient(top left, #000000 0%, #394745 100%); 
+}
+
+h1 {
+ color: #CCCCCC;
+}
+
+h3 {
+ font-family: 'Merriweather', serif;
+}
+
+#header {
+ text-align:center;
+}
