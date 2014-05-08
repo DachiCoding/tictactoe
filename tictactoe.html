@@ -12,12 +12,25 @@
   <!-- CSS -->
   <link rel="stylesheet" href="css/tictactoe.css">
   <link rel="stylesheet" href="css/bootstrap.css">
+  <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
 
   <style>
-   h3 {
-     font-family: 'Merriweather', serif;
+   h1 {
+     color: #CCCCCC;
+     font-family: 'Poiret One', serif;
+   }
+
+   h2 {
+     color: #BBBBBB;
+     font-family: 'Poiret One', serif;
    } 
+
+   .playchart {
+     left: 50%;
+     top : 50%;
+     margin:0 auto 0 auto;
+   }
   </style>
 
  <!-- end of head -->
@@ -25,15 +38,54 @@
 
  <!-- start of body -->
  <body>
+
  <div class="container page-header" id="header">
    <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
      <h1 style="color:#CCCCCC;">Introducing</h1>
-     <h3 class="text text-primary"><em>The Unbeatable Tic Tac Toe A.I</em></h3>
+     <h2 class="">The Unbeatable Tic Tac Toe A.I.</h2>
+     <br/>
+     <a href="mailto:dachi.xu@gmail.com">Email Author: dachi.xu@gmail.com</a>
     </div>
-    <div class="col-md-2"></div>
    </div>
+   <hr/>
+   
+   <!-- Playground -->
+   <div class="container playchart">
+    <br/><br/><br/><br/>
+    <div class="row chartrow" >
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 chartunit"></div>
+     <div class="col-md-1 chartunit"></div>
+     <div class="col-md-1 chartunit"></div>
+    </div>
+
+    <div class="row chartrow" >
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 chartunit"></div>
+     <div class="col-md-1 chartunit"></div>
+     <div class="col-md-1 chartunit"></div>
+    </div>
+
+    <div class="row chartrow" >
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 chartunit"></div>
+     <div class="col-md-1 chartunit"></div>
+     <div class="col-md-1 chartunit"></div>
+    </div>
+   </div>
+   <br/><br/><br/><br/>
+
  <!-- end of container -->
  </div>
 
