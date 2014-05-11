@@ -10,8 +10,8 @@
   <meta charset="UTF-8">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="css/tictactoe.css">
   <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/tictactoe.css">
   <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
 
@@ -31,7 +31,16 @@
      top : 50%;
      margin:0 auto 0 auto;
    }
+   
+   .btn {
+    width:100%;
+   }
   </style>
+
+ <!-- Javascript-->
+ <!-- External JS-->
+ <script src="js/jquery-2.0.3.min.js"></script>
+ <script src="js/bootstrap.min.js"></script>
 
  <!-- end of head -->
  </head>
@@ -44,7 +53,7 @@
     <div class="col-md-2"></div>
     <div class="col-md-8">
      <h1 style="color:#CCCCCC;">Introducing</h1>
-     <h2 class="">The Unbeatable Tic Tac Toe A.I.</h2>
+     <h2 class="">The Unbeatable Tic Tac Toe A.I.<sup>Beta</sup></h2>
      <br/>
      <a href="mailto:dachi.xu@gmail.com">Email Author: dachi.xu@gmail.com</a>
     </div>
@@ -62,6 +71,10 @@
      <div class="col-md-1 chartunit"></div>
      <div class="col-md-1 chartunit"></div>
      <div class="col-md-1 chartunit"></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-2 ">
+      <button class="btn btn-hg btn-primary">New Game</button>
+     </div>
     </div>
 
     <div class="row chartrow" >
@@ -72,6 +85,11 @@
      <div class="col-md-1 chartunit"></div>
      <div class="col-md-1 chartunit"></div>
      <div class="col-md-1 chartunit"></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-2 ">
+      <button class="btn btn-hg btn-warning" data-toggle="modal" data-target="#myModal">Bugs?</button>
+     </div>
+
     </div>
 
     <div class="row chartrow" >
@@ -82,13 +100,37 @@
      <div class="col-md-1 chartunit"></div>
      <div class="col-md-1 chartunit"></div>
      <div class="col-md-1 chartunit"></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-2 ">
+      <button class="btn btn-hg btn-info">Contact</button>
+     </div>
     </div>
    </div>
    <br/><br/><br/><br/>
 
+   <div class="alert alert-success fade in">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <p calss="text-success">You &gt A.I
+    </p>
+   </div>
+
+   <div class="alert alert-warning">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <p calss="text-warning">You =  A.I.
+    </p>
+   </div>
+
+   <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <p calss="text-danger">You &lt  A.I.
+    </p>
+   </div>
+
  <!-- end of container -->
  </div>
 
+ 
+ 
  <!-- end of body -->
  </body>
 </html>
