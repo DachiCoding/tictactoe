@@ -9,11 +9,14 @@ body {
  text-align:center;
 }
 
-
 .chartunit {
  height:100px;
  border:2px solid white;
  opacity:0.3;
+ vertical-align:middle;
+ font-size:70px;
+ font-family: 'Montserrat Alternates', sans-serif;
+ color:#FFFFFF;
 }
 
 .chartunit:hover {
@@ -475,4 +478,3 @@ fieldset[disabled] .btn-link:focus {
   font-size: 16px;
   margin: 0 1px;
 }
-
