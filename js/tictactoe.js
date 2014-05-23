@@ -10,19 +10,23 @@ window.onload = function(){
  var cubic8 = document.getElementById("c8");
  var cubic9 = document.getElementById("c9");
  cubic1.addEventListener('click',putX,false);
- cubic2.addEventListener('click',putX,false);
+ cubic2.addEventListener('click',putO,false);
  cubic3.addEventListener('click',putX,false);
- cubic4.addEventListener('click',putX,false);
+ cubic4.addEventListener('click',putO,false);
  cubic5.addEventListener('click',putX,false);
- cubic6.addEventListener('click',putX,false);
+ cubic6.addEventListener('click',putO,false);
  cubic7.addEventListener('click',putX,false);
- cubic8.addEventListener('click',putX,false);
+ cubic8.addEventListener('click',putO,false);
  cubic9.addEventListener('click',putX,false);
 }
 
 function putX(){
  //document.getElementById("c1").innerHTML = "X";
  this.innerHTML = "X";
+}
+
+function putO(){
+ this.innerHTML = "O";
 }
 
 function newGame(){
