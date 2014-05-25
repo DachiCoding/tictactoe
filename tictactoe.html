@@ -66,7 +66,15 @@
    
    <!-- Playground -->
    <div class="container playchart">
-    <br/><br/><br/><br/>
+     <!-- HUD -->
+    <div class="row chartrow" >
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-1 "></div>
+     <div class="col-md-3 chartunit" id="HUD"></div>
+    </div>
+    <br/><br/>
     <div class="row chartrow" >
      <div class="col-md-1 "></div>
      <div class="col-md-1 "></div>
@@ -183,18 +191,18 @@
    </div>
    <br/><br/><br/><br/>
 
-   <div class="alert alert-success fade in">
+   <div class="alert alert-success fade in" id="winDiv">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
     <p calss="text-success" id="wininfo">You Defeated A.I
     </p>
    </div>
 
-   <div class="alert alert-warning">
+   <div class="alert alert-warning" id="drawDiv">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
     <p calss="text-warning" id="drawinfo">Draw Game    </p>
    </div>
 
-   <div class="alert alert-danger">
+   <div class="alert alert-danger" id="loseDiv">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
     <p calss="text-danger" id="loseinfo">Oops...You Lose
     </p>
