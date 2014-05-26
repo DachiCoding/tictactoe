@@ -38,18 +38,17 @@ function playerMove(){
 }
 
 function aiMove(){
-   while (gameStatus === "off"){
    this.innerHTML = "O";
    gameTurn++;
    gameStatus = "on";
    HUD.innerHTML = "Your Move";
    scores["O"] += cubicVal[this.id];
-   }
 }
 
 //**************************************************************
 //*********************NEW GAME FUNCTION**********************
 function newGame(){
+
  //clean all cubics
  $(".chartunit").removeClass("cubicSpin");
  setTimeout(function(){$(".chartunit").addClass('cubicSpin')},0);
@@ -57,7 +56,7 @@ function newGame(){
  for(var i = 0; i < cubics.length; i++){
    cubics[i].innerHTML = "";
  }
- 
+
  //clean all notification
  $("#winDiv").fadeOut(500);
  $("#drawDiv").fadeOut(500);
@@ -70,13 +69,7 @@ function newGame(){
  gameStatus = "on";
 
  //reset newGame
- HUD = document.getElementById("HUD");
  HUD.innerHTML = "Your Move";
-
- //Prepare for player input
- for(var i = 0; i < cubics.length; i++){
-  cubics[i].addEventListener('click',playerMove,false);
- }
 }
 
 //**************************************************************
@@ -125,11 +118,7 @@ function check(){
 //*******************GAME FLOW CONTROLLER********************************
 window.onload = function() {
  //INITIALIZE ENVIORMENT AND SETUP
- var newgame = document.getElementById("newBtn");
- newgame.addEventListener('click',newGame,false);
- newGame();
-
- //GET THE CUBIC ELEMENTS
+ //Get the elements
  var cubic1 = document.getElementById("c1");
  var cubic2 = document.getElementById("c2");
  var cubic3 = document.getElementById("c3");
@@ -139,26 +128,34 @@ window.onload = function() {
  var cubic7 = document.getElementById("c7");
  var cubic8 = document.getElementById("c8");
  var cubic9 = document.getElementById("c9");
+ //Reset Game if new game is clicked.
+ var newgame = document.getElementById("newBtn");
+ newgame.addEventListener('click',newGame,false);
+
+ //Initialize HUD
+ HUD = document.getElementById("HUD");
+ HUD.innerHTML = "Your Move";
 
  //START GAME FLOW
+ //Make all cubic available for the first turn
+ cubic1.addEventListener('click',playerMove,false);
+ cubic2.addEventListener('click',playerMove,false);
+ cubic3.addEventListener('click',playerMove,false);
+ cubic4.addEventListener('click',playerMove,false);
+ cubic5.addEventListener('click',playerMove,false);
+ cubic6.addEventListener('click',playerMove,false);
+ cubic7.addEventListener('click',playerMove,false);
+ cubic8.addEventListener('click',playerMove,false);
+ cubic9.addEventListener('click',playerMove,false);
+
  // -> If an empty cubic is clicked 
  // -> Remove event listener from the cubic clicked
  // -> Judge situation 
  // -> A.I move
  // -> Remove event listener from the cubic A.I occupied
  // -> Wait for next input or reach a game result
- cubic2.moveFunc = aiMove;
- $("#c1").click(function(){
+
  cubic2.moveFunc = aiMove; 
  cubic2.moveFunc();
  cubic2.removeEventListener('click',playerMove,false);
- });
-
-
-
-
-
-
-
-
 }

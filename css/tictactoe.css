@@ -18,6 +18,16 @@ body {
  -webkit-animation: 1.5s hudBlink infinite alternate ease-in-out;
 }
 
+.chartHUD {
+ height:100px;
+ border:2px solid white;
+ opacity:0.3;
+ vertical-align:middle;
+ font-size:70px;
+ font-family: 'Montserrat Alternates', sans-serif;
+ color:#FFFFFF;
+}
+
 .chartunit {
  height:100px;
  border:2px solid white;
