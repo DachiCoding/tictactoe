@@ -14,8 +14,8 @@ body {
  vertical-align:middle;
  font-size:40px;
  opacity:1.0;
- //animation:HUDBlink 2s;
- //-webkit-animation:HUDBlink 2s;
+ animation: 1.5s hudBlink infinite alternate ease-in-out;
+ -webkit-animation: 1.5s hudBlink infinite alternate ease-in-out;
 }
 
 .chartunit {
@@ -46,10 +46,38 @@ body {
 }
 
 .cubicSpin {
- transform:rotateY(180deg);
- -webkit-transform:rotateY(180deg);
- transition:1s;
- -webkit-transition:1s;
+ /*
+ transform: rotateY(360deg);
+ -webkit-transform: rotateY(360deg);
+ transition: 1s;
+ -webkit-transition: 1s;
+ */
+ animation: 0.65s cbcSpin ;
+ -webkit-animation: 0.65s cbcSpin ;
+}
+
+@keyframes cbcSpin {
+ 0% {transform: rotateY(0deg);}
+ 50% {transform: rotateY(180deg);}
+ 100% {transform: rotateY(360deg);}
+}
+
+@-webkit-keyframes cbcSpin {
+ 0% {-webkit-transform: rotateY(0deg);}
+ 50% {-webkit-transform: rotateY(180deg);}
+ 100% {webkit-transform: rotateY(360deg);}
+}
+
+@keyframes hudBlink {
+ 0% { border:2px solid white;}
+ 50% {border:2px solid grey;}
+ 100% { border:2px solid white;}
+}
+
+@-webkit-keyframes hudBlink {
+ 0% { border:2px solid white;}
+ 50% {border:2px solid grey;}
+ 100% { border:2px solid white;}
 }
 
 //flat-UI
