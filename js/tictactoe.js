@@ -52,7 +52,7 @@ window.onload = function(){
  cubic7.addEventListener('click',Move,false);
  cubic8.addEventListener('click',Move,false);
  cubic9.addEventListener('click',Move,false);
-
+ 
 }
 
 function Move(){
@@ -69,6 +69,7 @@ function Move(){
    HUD.innerHTML = "Your Move";
    scores["O"] += cubicVal[this.id];
   }
+  check();
 }
 
 //Start A New Game
@@ -97,6 +98,17 @@ function newGame(){
 function check(){
  var result;
  //check
+ for (var i = 0; i < winSet.length; i++){
+  if ((winSet[i] & scores["X"]) === winSet[i]){
+   result = "win";
+  }
+  else if ((winSet[i] & scores["O"]) === winSet[i]){
+   result = "lose";
+  }
+  else if (gameTurn === 9){
+   result = "draw";
+  }
+ }
  
  if (result === "win"){
    $("#winDiv").fadeIn(500);
