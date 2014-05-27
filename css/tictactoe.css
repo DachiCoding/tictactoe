@@ -21,7 +21,7 @@ body {
 .chartHUD {
  height:100px;
  border:2px solid white;
- opacity:0.3;
+ opacity:0.5;
  vertical-align:middle;
  font-size:70px;
  font-family: 'Montserrat Alternates', sans-serif;
@@ -56,14 +56,17 @@ body {
 }
 
 .cubicSpin {
- /*
- transform: rotateY(360deg);
- -webkit-transform: rotateY(360deg);
- transition: 1s;
- -webkit-transition: 1s;
- */
  animation: 0.65s cbcSpin ;
  -webkit-animation: 0.65s cbcSpin ;
+}
+
+.clicked {
+ opacity:1.0;
+ border:3px solid white;
+}
+
+.clickable {
+ 
 }
 
 @keyframes cbcSpin {
