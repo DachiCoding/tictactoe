@@ -216,12 +216,12 @@ $(document).ready(function(){
      case 3:
       //c5 -> c1
       if (tracker[1] === "c1"){
-       //c5 -> c1 -> c9
+       //c5 -> c1 -> c7,c9
        if ( tracker[2] === "c9" || tracker[2] === "c7"){ 
         cubic3.moveFunc = aiMove; 
 	cubic3.moveFunc();
        } 
-       //c5 -> c1 -> Not c9
+       //c5 -> c1 -> c
        else if (){
        }
       } 
