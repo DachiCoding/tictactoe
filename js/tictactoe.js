@@ -222,8 +222,6 @@ $(document).ready(function(){
 	cubic3.moveFunc();
        } 
        //c5 -> c1 -> c
-       else if (){
-       }
       } 
 
       //Not c5 -> c5
@@ -239,7 +237,6 @@ $(document).ready(function(){
 
      //Player makes third move; 
      case 5:
-      if (
       check();
       break;
 
