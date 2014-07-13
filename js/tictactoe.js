@@ -1,4 +1,4 @@
-//Tic Tac Toe JS
+//Tic Tac Toe JS Implemented with MiniMax Algorithm
 //Dachi Xu, dachi.xu@gmail.com
 
 //***********************************************************************
@@ -46,39 +46,17 @@ var next = {
 	      "c8":["c5","c7","c9"],
              }
 
+var winStatus = [];
+
+//Function List
+/*
+Flow: newGame(), gameFlow Function
+Move: playerMove(), aiMove(), aiSearch(), miniMaxSearch()
+Chck: ifWin(), check()
+*/
 
 //**************************************************************
-//*********************MOVE FUNCTIONs***************************
-function playerMove(){
-  while (gameStatus === "on" && gameOver === false){
-   this.innerHTML = "X";
-   gameTurn++;
-   gameStatus = "off";
-   HUD.innerHTML = "A.I's Move";
-   scores["X"] += cubicVal[this.id];
-   $(this).removeClass('clickable');
-   $(this).addClass('clicked');
-   this.removeEventListener('click',playerMove,false);
-   tracker.push($(this).attr("id"));
-  }
-}
-
-function aiMove(){
-   while (gameStatus === "off" && gameOver === false){
-   this.innerHTML = "O";
-   gameTurn++;
-   gameStatus = "on";
-   HUD.innerHTML = "Your Move";
-   scores["O"] += cubicVal[this.id];
-   $(this).removeClass('clickable');
-   $(this).addClass('clicked');
-   this.removeEventListener('click',playerMove,false);
-   tracker.push($(this).attr("id"));
-   }
-}
-
-//**************************************************************
-//*********************NEW GAME FUNCTION**********************
+//*********************NEW GAME FUNCTION************************
 function newGame(){
  //clean all cubics
  $(".chartunit").removeClass("cubicSpin");
@@ -110,6 +88,36 @@ function newGame(){
   cubics[i].addEventListener('click',playerMove,false);
  }
  gameOver = false;
+}
+
+//**************************************************************
+//*********************MOVE FUNCTIONs***************************
+function playerMove(){
+  while (gameStatus === "on" && gameOver === false){
+   this.innerHTML = "X";
+   gameTurn++;
+   gameStatus = "off";
+   HUD.innerHTML = "A.I's Move";
+   scores["X"] += cubicVal[this.id];
+   $(this).removeClass('clickable');
+   $(this).addClass('clicked');
+   this.removeEventListener('click',playerMove,false);
+   tracker.push($(this).attr("id"));
+  }
+}
+
+function aiMove(){
+   while (gameStatus === "off" && gameOver === false){
+   this.innerHTML = "O";
+   gameTurn++;
+   gameStatus = "on";
+   HUD.innerHTML = "Your Move";
+   scores["O"] += cubicVal[this.id];
+   $(this).removeClass('clickable');
+   $(this).addClass('clicked');
+   this.removeEventListener('click',playerMove,false);
+   tracker.push($(this).attr("id"));
+   }
 }
 
 //**************************************************************
