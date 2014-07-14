@@ -3,50 +3,31 @@
 
 //***********************************************************************
 //*****************INITIALIZE GLOBAL VARIABLES***************************
-var gameTurn = 0;
-var gameOver = false;
-var scores = {"X":0,"O":0};
-var gameStatus = "on"; //Player can move only gameStatus is "on", and the cubic should be blinking.
 
-/*
-var ifTaken = { 
-		"c1":0,"c2":0,"c3":0, //if the single cubic is available
-		"c4":0,"c5":0,"c6":0,
-		"c7":0,"c8":0,"c9":0 
-	      };
-*/
+//Game constants
+var infinity = 100;
+var winScore = infinity; //score if win
+var losScore = -infinity; //score if lose
+var dblScore = infinity*0.5; //score if double linked condition
+var inprogress = 1;
+var draw = 0;
 
+//Game flow variables;
+var gameStatus = "on"; // on,off and over
+
+
+//Game info
+
+var boardStatus = { 
+		"c1":"","c2":"","c3":"", 
+		"c4":"","c5":"","c6":"", 
+		"c7":"","c8":"","c9":"" 
+};
+
+var winStatus = {
+
+//Elements
 var HUD;
-var cubicVal = {
-		"c1":1,"c2":2,"c3":4,
-		"c4":8,"c5":16,"c6":32,
-		"c7":64,"c8":128,"c9":256
-	       };
-var tracker = [];
-var winSet = [7,56,448,73,146,292,273,84];
-var center = "c5";
-var edge = ["c2","c4","c6","c8"];
-var corner = ["c1","c3","c7","c9"];
-var diag = {
-	        "c1":["c5","c9"],
-		"c3":["c5","c7"],
-		"c7":["c5","c3"],
-		"c9":["c5","c1"],
-		"c5":["c1","c3","c7","c9"]
-	       };
-var next = {
-	      "c1":["c2","c4"],
-	      "c3":["c2","c6"],
-	      "c7":["c4","c8"],
-	      "c9":["c6","c8"],
-	      "c5":["c2","c4","c6","c8"],
-	      "c2":["c1","c3","c5"],
-	      "c4":["c1","c5","c7"],
-	      "c6":["c5","c3","c9"],
-	      "c8":["c5","c7","c9"],
-             }
-
-var winStatus = [];
 
 //Function List
 /*
@@ -203,7 +184,6 @@ $(document).ready(function(){
  var cubic9 = document.getElementById("c9");
 
  //GAME FLOW
- //Thanks to http://www.wikihow.com/Win-at-Tic-Tac-Toe for the game logic
  $(".chartunit").click(function(){
   if(check() !== true){
     switch (gameTurn){
