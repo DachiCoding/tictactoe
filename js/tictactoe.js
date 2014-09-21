@@ -24,16 +24,18 @@ var boardStatus = {
 		"c7":"","c8":"","c9":"" 
 };
 
-var winStatus = {
+var scores = {
+ 'X':"",
+ 'O':""
+}
 
 //Elements
-var HUD;
 
 //Function List
 /*
-Flow: newGame(), gameFlow Function
-Move: playerMove(), aiMove(), aiSearch(), miniMaxSearch()
-Chck: ifWin(), check()
+Controller: newGame(), gameFlow(),check(), ifWin(), playerMove(), aiMove()
+Model: aiSearch(), miniMaxSearch()
+View: hudUpdate();
 */
 
 //**************************************************************

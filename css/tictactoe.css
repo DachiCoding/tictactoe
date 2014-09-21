@@ -5,6 +5,26 @@ body {
  background-image: -ms-linear-gradient(top left, #000000 0%, #394745 100%); 
 }
 
+h1 {
+  color: #CCCCCC;
+  font-family: 'Poiret One', serif;
+}
+
+h2 {
+  color: #BBBBBB;
+  font-family: 'Poiret One', serif;
+} 
+
+.playchart {
+  left: 50%;
+  top : 50%;
+  margin:0 auto 0 auto;
+}
+
+.btn {
+ width:100%;
+}
+
 #header {
  text-align:center;
 }
