@@ -69,10 +69,26 @@ var aiEngine = new Object();
 aiEngine = {
  "winScore":+100,
  "losScore":-100,
- "draScore":0,
+ "drwScore":0,
+ 
+ "evaluate":function(result){
+   if (result == "win"){
+    return aiEngine.winScore;
+   }
+   else if (result == "lose"){
+    return aiEngine.losScore;
+   }
+   else {
+    return aiEngine.drwScore;
+   }
+ },
  
  "miniMax":function(){
   //miniMax Implementation
+  /*
+  1.Try every step
+  2.Store all results/scores
+  */
  },
 
  "bestMove":function(){
