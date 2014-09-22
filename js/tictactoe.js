@@ -67,20 +67,29 @@ buttons.newGame = document.getElementById("newBtn");
 //Algorithm constants
 var aiEngine = new Object();
 aiEngine = {
- "winScore":+100,
- "losScore":-100,
+ "winScore":+10,
+ "losScore":-10,
  "drwScore":0,
  
- "evaluate":function(result){
-   if (result == "win"){
-    return aiEngine.winScore;
-   }
-   else if (result == "lose"){
-    return aiEngine.losScore;
-   }
-   else {
-    return aiEngine.drwScore;
-   }
+ "evaluate":function(scenario,depth){
+   if
+   (
+     gameFlow.gameCheckH(scenario) == 'X' || 
+     gameFlow.gameCheckV(scenario) == 'X' || 
+     gameFlow.gameCheckD(scenario) == 'X' 
+   )
+   { return aiEngine.winScore-depth;}
+
+   else if 
+   (
+     gameFlow.gameCheckH(scenario) == 'O' || 
+     gameFlow.gameCheckV(scenario) == 'O' || 
+     gameFlow.gameCheckD(scenario) == 'O' 
+   )
+   { return aiEngine.losScore+depth;}
+
+   else 
+   { return aiEngine.drwScore;}
  },
  
  "miniMax":function(){
@@ -172,52 +181,57 @@ gameFlow = {
  },
 
  //Check Game 
- "gameCheckH":function(){
-  for (var i = 0; i < 7; i += 3){
-   if ((cubics.elements[i].innerHTML == cubics.elements[i+1].innerHTML) && 
-       (cubics.elements[i].innerHTML == cubics.elements[i+2].innerHTML) &&
-        cubics.elements[i].innerHTML != ""
+ "gameCheckH":function(cubicInfo){
+  for (var i = 1; i < 8; i += 3){
+   if (
+       (cubicInfo["c"+i] == cubicInfo["c"+(i+1)]) && 
+       (cubicInfo["c"+i] == cubicInfo["c"+(i+2)]) &&
+       (cubicInfo["c"+i] != "")
       )
    {
-    return cubics.elements[i].innerHTML;
+    return cubics.cubicStatus["c"+i];
    }
   }
  },
 
- "gameCheckV":function(){
-  for (var i = 0; i < 3; i++){
-   if ((cubics.elements[i].innerHTML == cubics.elements[i+3].innerHTML) && 
-       (cubics.elements[i].innerHTML == cubics.elements[i+6].innerHTML) &&
-        cubics.elements[i].innerHTML != ""
+ "gameCheckV":function(cubicInfo){
+  for (var i = 1; i < 4; i++){
+   if (
+       (cubicInfo["c"+i] == cubicInfo["c"+(i+3)]) && 
+       (cubicInfo["c"+i] == cubicInfo["c"+(i+6)]) &&
+       (cubicInfo["c"+i] != "")
       )
    {
-    return cubics.elements[i].innerHTML;
+    return cubicInfo["c"+i];
    }
   } 
  },
 
- "gameCheckD":function(){
-   if ((cubics.elements[0].innerHTML == cubics.elements[4].innerHTML) && 
-       (cubics.elements[0].innerHTML == cubics.elements[8].innerHTML) &&
-        cubics.elements[4].innerHTML != ""
+ "gameCheckD":function(cubicInfo){
+   if (
+      (cubicInfo["c1"] == cubicInfo["c5"]) && 
+      (cubicInfo["c5"] == cubicInfo["c9"]) &&
+      (cubicInfo["c5"] != "")
       )
-   { return cubics.elements[4].innerHTML;}
-   else if ((cubics.elements[2].innerHTML == cubics.elements[4].innerHTML) && 
-            (cubics.elements[2].innerHTML == cubics.elements[6].innerHTML) &&
-            cubics.elements[4].innerHTML != ""
-	   )
-   { return cubics.elements[4].innerHTML;}
+   { return cubicInfo["c5"];}
+   else if 
+      (
+      (cubicInfo["c3"] == cubicInfo["c5"]) && 
+      (cubicInfo["c5"] == cubicInfo["c7"]) &&
+      (cubicInfo["c5"] != "")
+      )
+   { return cubicInfo["c5"];}
  },
 
  //Check if the game reachs an end
  "gameCheck":function(){
   //check if game ends, if yes call gameEnd() or continue
   //update gameStatus
-   if (gameFlow.gameCheckH() == 'X' || gameFlow.gameCheckV() == 'X' || gameFlow.gameCheckD() == 'X'){
+   if (gameFlow.gameCheckH(cubics.cubicStatus) == 'X' || gameFlow.gameCheckV(cubics.cubicStatus) == 'X' || gameFlow.gameCheckD(cubics.cubicStatus) == 'X'){
     gameFlow.gameResult = "win"; //player wins
     gameFlow.gameEnd();
    }
-   else if (gameFlow.gameCheckH() == 'O' || gameFlow.gameCheckV() == 'O' || gameFlow.gameCheckD() == 'O'){
+   else if (gameFlow.gameCheckH(cubics.cubicStatus) == 'O' || gameFlow.gameCheckV(cubics.cubicStatus) == 'O' || gameFlow.gameCheckD(cubics.cubicStatus) == 'O'){
     gameFlow.gameResult = "lose"; //player lose
     gameFlow.gameEnd();
    } 
