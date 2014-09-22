@@ -5,6 +5,23 @@
 //website: http://dachicj.com
 
 //***********************************************************************
+//WORKFLOW
+/*
+1.gameRest1()
+2.wait for player move -> gameRun()
+3.gameCheck() -> if not end call AI() -> step 2
+              -> if end, call gameEnd() -> if new game button is clicked -> step 1
+*/
+
+//AI LOGIC
+/*
+ if Win
+ else if Lose
+ else if Draw
+ else None
+*/
+
+//***********************************************************************
 //***************************GAME VIEW***********************************
 //HUD element
 var HUD = new Object();
@@ -21,12 +38,13 @@ cubics.cubicStatus = {
 		"c4":"","c5":"","c6":"", 
 		"c7":"","c8":"","c9":"" 
 };
-
+cubics.available = 9;
 cubics.playerMove = function(id){
  document.getElementById(id).innerHTML="X";
  document.getElementById(id).removeEventListener('click',gameFlow.gameRun,false);
  document.getElementById(id).classList.add("clicked");
  cubics.cubicStatus[id] = "X";
+ cubics.avaiable--;
 };
 
 cubics.aiMove = function(id){
@@ -34,72 +52,12 @@ cubics.aiMove = function(id){
  document.getElementById(id).removeEventListener('click',gameFlow.gameRun,false);
  document.getElementById(id).classList.add("clicked");
  cubics.cubicStatus[id] = "O";
+ cubics.avaiable--;
 }
 
 //Button elements
 var buttons = new Object();
 buttons.newGame = document.getElementById("newBtn");
-
-//***********************************************************************
-//****************************GAME CONTROLLER****************************
-//game flow object
-var gameFlow = new Object();
-gameFlow = {
- "gameStatus":"on", // on or off
- "gameResult":"none", // none or win or lose or draw (player perspective)
- 
- //Initialize the game enviorment
- "gameReset":function(){
-   //Initialize game status
-   gameFlow.gameStatus = "on";
-  
-   //Enable New Game Button
-   buttons.newGame.addEventListener("click",gameFlow.gameReset,false);
-
-   //Initialize HUD
-   HUD.update("Your Move");
-
-  //Initialize Cubics
-  for(var i = 0; i < cubics.elements.length; i++){
-   cubics.elements[i].addEventListener("click",gameFlow.gameRun,false);
-  }
- },
- 
- //Game is over
- "gameEnd":function(){
-  //Update game status
-  gameFlow.gameStatus = "off";
-
-  //Update HUD
-
-  //Update Cubics
-
- },
- 
- //Check if the game reachs an end
- "gameCheck":function(){
-  //check if game ends, if yes call gameEnd() or continue
-  
- },
-
- //Go through the game flow
- "gameRun": function(){
-  //Handle player move
-  if (gameFlow.gameStatus === "on"){
-  var id = $(this).attr("id");
-  cubics.playerMove(id);
-  gameFlow.gameCheck();
-  
-  //if game is not over, then A.I move
-  gameFlow.gameStatus = "off";
-  HUD.update("A.I's thinking...");
-  aiEngine.makeMove();
-  gameFlow.gameCheck();
-  gameFlow.gameStatus = "on";
-  HUD.update("Your move");
-  }
- }
-}
 
 //***********************************************************************
 //****************************GAME MODEL*********************************
@@ -123,6 +81,150 @@ aiEngine = {
  }
 }
 
+//***********************************************************************
+//****************************GAME CONTROLLER****************************
+//game flow object
+var gameFlow = new Object();
+gameFlow = {
+ "gameStatus":"on", // on or off
+ "gameResult":"none", // none or win or lose or draw (player perspective)
+ 
+ //Initialize the game enviorment
+ "gameReset":function(){
+   //Reset game status
+   gameFlow.gameStatus = "on";
+   gameFlow.gameResult = "none";
+  
+   //Enable Buttons
+   buttons.newGame.addEventListener("click",gameFlow.gameReset,false);
+
+   //Reset HUD
+   HUD.update("Your Move");
+
+  //Reset Cubics
+  cubics.cubicStatus = { 
+		"c1":"","c2":"","c3":"", 
+		"c4":"","c5":"","c6":"", 
+		"c7":"","c8":"","c9":"" 
+  };
+  cubics.available = 9;
+  for(var i = 0; i < cubics.elements.length; i++){
+   cubics.elements[i].innerHTML = "";
+   cubics.elements[i].classList.remove("clicked");
+   cubics.elements[i].addEventListener("click",gameFlow.gameRun,false);
+  }
+ },
+ 
+ //Game is over
+ "gameEnd":function(){
+  //Update game status
+  gameFlow.gameStatus = "off";
+
+  //Update HUD
+  switch(gameFlow.gameResult){
+   case "win":
+    HUD.update("You win...");
+    break;
+   
+   case "lose":
+    HUD.update("You lose...");
+    break;
+
+   case "draw":
+    HUD.update("Draw game..");
+    break;
+
+   default:
+    HUD.update("Game Over...");
+    break;
+  }
+
+  //Update Cubics
+  for(var i = 0; i < cubics.elements.length; i++){
+   cubics.elements[i].removeEventListener("click",gameFlow.gameRun,false);
+  }
+
+ },
+
+ //Check Game 
+ "gameCheckH":function(){
+  for (var i = 0; i < 7; i += 3){
+   if ((cubics.elements[i].innerHTML == cubics.elements[i+1].innerHTML) && 
+       (cubics.elements[i].innerHTML == cubics.elements[i+2].innerHTML) &&
+        cubics.elements[i].innerHTML != ""
+      )
+   {
+    return cubics.elements[i].innerHTML;
+   }
+  }
+ },
+
+ "gameCheckV":function(){
+  for (var i = 0; i < 3; i++){
+   if ((cubics.elements[i].innerHTML == cubics.elements[i+3].innerHTML) && 
+       (cubics.elements[i].innerHTML == cubics.elements[i+6].innerHTML) &&
+        cubics.elements[i].innerHTML != ""
+      )
+   {
+    return cubics.elements[i].innerHTML;
+   }
+  } 
+ },
+
+ "gameCheckD":function(){
+   if ((cubics.elements[0].innerHTML == cubics.elements[4].innerHTML) && 
+       (cubics.elements[0].innerHTML == cubics.elements[8].innerHTML) &&
+        cubics.elements[4].innerHTML != ""
+      )
+   { return cubics.elements[4].innerHTML;}
+   else if ((cubics.elements[2].innerHTML == cubics.elements[4].innerHTML) && 
+            (cubics.elements[2].innerHTML == cubics.elements[6].innerHTML) &&
+            cubics.elements[4].innerHTML != ""
+	   )
+   { return cubics.elements[4].innerHTML;}
+ },
+
+ //Check if the game reachs an end
+ "gameCheck":function(){
+  //check if game ends, if yes call gameEnd() or continue
+  //update gameStatus
+   if (gameFlow.gameCheckH() == 'X' || gameFlow.gameCheckV() == 'X' || gameFlow.gameCheckD() == 'X'){
+    gameFlow.gameResult = "win"; //player wins
+    gameFlow.gameEnd();
+   }
+   else if (gameFlow.gameCheckH() == 'O' || gameFlow.gameCheckV() == 'O' || gameFlow.gameCheckD() == 'O'){
+    gameFlow.gameResult = "lose"; //player lose
+    gameFlow.gameEnd();
+   } 
+   else if ( cubics.avaiable = 0){
+    gameFlow.gameResult = "draw";
+    gameFlow.gameEnd();
+   }
+   else {
+    gameFlow.gameResult = "none";
+  }
+ },
+
+ //Go through the game flow
+ "gameRun": function(){
+  //Handle player move
+  if (gameFlow.gameStatus === "on"){
+  var id = $(this).attr("id");
+  cubics.playerMove(id);
+  gameFlow.gameCheck();
+  
+  //if game is not over, then A.I move
+  if (gameFlow.gameResult === "none"){
+    gameFlow.gameStatus = "off";
+    HUD.update("A.I's thinking...");
+    aiEngine.makeMove();
+    gameFlow.gameCheck();
+    gameFlow.gameStatus = "on";
+    HUD.update("Your move");
+   }
+  }
+ }
+}
 
 //***********************************************************************
 //***************************GAME FLOW***********************************
