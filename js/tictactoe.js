@@ -70,6 +70,7 @@ aiEngine = {
  "winScore":+10,
  "losScore":-10,
  "drwScore":0,
+ "moveIndex":"",
  
  "evaluate":function(scenario,depth){
    if
@@ -88,27 +89,60 @@ aiEngine = {
    )
    { return aiEngine.losScore+depth;}
 
-   else 
+   else if ( depth == 9)
    { return aiEngine.drwScore;}
+   
+   else {
+     return "notover";
+   }
  },
  
- "miniMax":function(){
+ "miniMax":function(scenario,side,alpha,beta){
   //miniMax Implementation
-  /*
-  1.Try every step
-  2.Store all results/scores
-  */
- },
+  var depth = 0;
+  var possible_moves = [];
+  for(var cubic in scenario){
+   if (scenario[cubic] != ""){
+    depth++;
+   } else {
+    possible_moves.push(cubic);
+   }
+  }
 
- "bestMove":function(){
-  //Call miniMax to figure out the best move
+  if (aiEngine.evaluate(scenario,depth) != "notover"){
+   return aiEngine.evaluate(scenario,depth);
+  }
+
+  depth += 1;
+  var scores = [];
+
+  for(var i = 0; i < possible_moves.length; i++){
+   var move = possible_moves[i];
+   scenario[move] = side;
+   scores.push(aiEngine.miniMax(scenario,(side == "X")? "O":"X"));
+  }
+  
+  if (side == 'O'){
+   var moveIdx = scores.indexOf(Math.max.apply(Math,scores));
+  } else {
+   var moveIdx = scores.indexOf(Math.min.apply(Math,scores));
+  }
+  
+  aiEngine.moveIndex = moveIdx;
+  return scores[moveIdx];
+
  },
 
  "makeMove":function(){
   //Make the best move for A.I.
   
   //Test gameCheck functionality
-  cubics.aiMove(cubics.available[Math.floor((Math.random() * cubics.available.length))]);
+  //cubics.aiMove(cubics.available[Math.floor((Math.random() * cubics.available.length))]);
+  var hypoScenario = {};
+  hypoScenario = jQuery.extend(true, {}, cubics.cubicStatus); // current status of the cubics
+  aiEngine.miniMax(hypoScenario,"O",aiEngine.winScore,aiEngine.losScore);
+  var move = cubics.available[aiEngine.moveIndex];
+  cubics.aiMove(move);
  }
 }
 
@@ -235,7 +269,7 @@ gameFlow = {
     gameFlow.gameResult = "lose"; //player lose
     gameFlow.gameEnd();
    } 
-   else if ( cubics.available.length == 0){
+   else if (cubics.available.length == 0){
     gameFlow.gameResult = "draw";
     gameFlow.gameEnd();
    }

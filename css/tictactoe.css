@@ -32,7 +32,7 @@ h2 {
 #HUD {
  text-align:center;
  vertical-align:middle;
- font-size:40px;
+ font-size:35px;
  opacity:1.0;
  animation: 1.5s hudBlink infinite alternate ease-in-out;
  -webkit-animation: 1.5s hudBlink infinite alternate ease-in-out;
