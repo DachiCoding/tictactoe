@@ -38,13 +38,16 @@ cubics.cubicStatus = {
 		"c4":"","c5":"","c6":"", 
 		"c7":"","c8":"","c9":"" 
 };
-cubics.available = 9;
+cubics.available = ["c1","c2","c3",
+   		    "c4","c5","c6",
+		    "c7","c8","c9"];
+
 cubics.playerMove = function(id){
  document.getElementById(id).innerHTML="X";
  document.getElementById(id).removeEventListener('click',gameFlow.gameRun,false);
  document.getElementById(id).classList.add("clicked");
  cubics.cubicStatus[id] = "X";
- cubics.avaiable--;
+ cubics.available.splice(cubics.available.indexOf(id),1);
 };
 
 cubics.aiMove = function(id){
@@ -52,7 +55,7 @@ cubics.aiMove = function(id){
  document.getElementById(id).removeEventListener('click',gameFlow.gameRun,false);
  document.getElementById(id).classList.add("clicked");
  cubics.cubicStatus[id] = "O";
- cubics.avaiable--;
+ cubics.available.splice(cubics.available.indexOf(id),1);
 }
 
 //Button elements
@@ -78,6 +81,9 @@ aiEngine = {
 
  "makeMove":function(){
   //Make the best move for A.I.
+  
+  //Test gameCheck functionality
+  cubics.aiMove(cubics.available[Math.floor((Math.random() * cubics.available.length))]);
  }
 }
 
@@ -107,7 +113,10 @@ gameFlow = {
 		"c4":"","c5":"","c6":"", 
 		"c7":"","c8":"","c9":"" 
   };
-  cubics.available = 9;
+  cubics.available = ["c1","c2","c3",
+   		      "c4","c5","c6",
+		      "c7","c8","c9"];
+
   for(var i = 0; i < cubics.elements.length; i++){
    cubics.elements[i].innerHTML = "";
    cubics.elements[i].classList.remove("clicked");
@@ -131,7 +140,7 @@ gameFlow = {
     break;
 
    case "draw":
-    HUD.update("Draw game..");
+    HUD.update("Draw...");
     break;
 
    default:
@@ -196,7 +205,7 @@ gameFlow = {
     gameFlow.gameResult = "lose"; //player lose
     gameFlow.gameEnd();
    } 
-   else if ( cubics.avaiable = 0){
+   else if ( cubics.available.length == 0){
     gameFlow.gameResult = "draw";
     gameFlow.gameEnd();
    }
@@ -209,18 +218,20 @@ gameFlow = {
  "gameRun": function(){
   //Handle player move
   if (gameFlow.gameStatus === "on"){
+  gameFlow.gameStatus = "off";
   var id = $(this).attr("id");
   cubics.playerMove(id);
   gameFlow.gameCheck();
   
   //if game is not over, then A.I move
   if (gameFlow.gameResult === "none"){
-    gameFlow.gameStatus = "off";
     HUD.update("A.I's thinking...");
     aiEngine.makeMove();
     gameFlow.gameCheck();
-    gameFlow.gameStatus = "on";
-    HUD.update("Your move");
+    if (gameFlow.gameResult === "none"){
+     gameFlow.gameStatus = "on";
+     HUD.update("Your move");
+    }
    }
   }
  }
