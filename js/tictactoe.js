@@ -89,16 +89,13 @@ aiEngine = {
    )
    { return aiEngine.losScore+depth;}
 
-   else if ( depth == 9)
+   else ( depth == 9)
    { return aiEngine.drwScore;}
-   
-   else {
-     return "notover";
-   }
  },
  
- "miniMax":function(scenario,side,alpha,beta){
+ "miniMax":function(scenario,side){
   //miniMax Implementation
+
   var depth = 0;
   var possible_moves = [];
   for(var cubic in scenario){
@@ -109,17 +106,18 @@ aiEngine = {
    }
   }
 
-  if (aiEngine.evaluate(scenario,depth) != "notover"){
-   return aiEngine.evaluate(scenario,depth);
+  if (aiEngine.evaluate(scenario,depth) !=0 || depth == 9)
+  {
+      return aiEngine.evaluate(scenario,depth);
   }
 
-  depth += 1;
   var scores = [];
+  var opponent = (side == "X")? "O":"X";
 
   for(var i = 0; i < possible_moves.length; i++){
    var move = possible_moves[i];
    scenario[move] = side;
-   scores.push(aiEngine.miniMax(scenario,(side == "X")? "O":"X"));
+   scores.push(aiEngine.miniMax(scenario,opponent));
   }
   
   if (side == 'O'){
@@ -137,12 +135,14 @@ aiEngine = {
   //Make the best move for A.I.
   
   //Test gameCheck functionality
-  cubics.aiMove(cubics.available[Math.floor((Math.random() * cubics.available.length))]);
- // var hypoScenario = {};
- // hypoScenario = jQuery.extend(true, {}, cubics.cubicStatus); // current status of the cubics
- // aiEngine.miniMax(hypoScenario,"O",aiEngine.winScore,aiEngine.losScore);
- // var move = cubics.available[aiEngine.moveIndex];
- // cubics.aiMove(move);
+  //cubics.aiMove(cubics.available[Math.floor((Math.random() * cubics.available.length))]);
+
+  //Using miniMax to search for the best move.
+  var hypoScenario = {};
+  hypoScenario = jQuery.extend(true, {}, cubics.cubicStatus); // current status of the cubics
+  aiEngine.miniMax(hypoScenario,"O");
+  var move = cubics.available[aiEngine.moveIndex];
+  cubics.aiMove(move);
  }
 }
 
@@ -168,7 +168,7 @@ gameFlow = {
 
   //Reset Cubics
   cubics.cubicStatus = { 
-		"c1":"","c2":"","c3":"", 
+		"c1":"","c2":"","c3":"",
 		"c4":"","c5":"","c6":"", 
 		"c7":"","c8":"","c9":"" 
   };
