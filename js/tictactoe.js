@@ -137,12 +137,12 @@ aiEngine = {
   //Make the best move for A.I.
   
   //Test gameCheck functionality
-  //cubics.aiMove(cubics.available[Math.floor((Math.random() * cubics.available.length))]);
-  var hypoScenario = {};
-  hypoScenario = jQuery.extend(true, {}, cubics.cubicStatus); // current status of the cubics
-  aiEngine.miniMax(hypoScenario,"O",aiEngine.winScore,aiEngine.losScore);
-  var move = cubics.available[aiEngine.moveIndex];
-  cubics.aiMove(move);
+  cubics.aiMove(cubics.available[Math.floor((Math.random() * cubics.available.length))]);
+ // var hypoScenario = {};
+ // hypoScenario = jQuery.extend(true, {}, cubics.cubicStatus); // current status of the cubics
+ // aiEngine.miniMax(hypoScenario,"O",aiEngine.winScore,aiEngine.losScore);
+ // var move = cubics.available[aiEngine.moveIndex];
+ // cubics.aiMove(move);
  }
 }
 
