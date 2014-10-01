@@ -89,7 +89,7 @@ aiEngine = {
    )
    { return aiEngine.losScore+depth;}
 
-   else ( depth == 9)
+   else
    { return aiEngine.drwScore;}
  },
  
@@ -112,15 +112,15 @@ aiEngine = {
   }
 
   var scores = [];
-  var opponent = (side == "X")? "O":"X";
 
   for(var i = 0; i < possible_moves.length; i++){
-   var move = possible_moves[i];
-   scenario[move] = side;
-   scores.push(aiEngine.miniMax(scenario,opponent));
+      var move = possible_moves[i];
+      var scenairoCopy = jQuery.extend(true, {}, scenario);
+      scenairoCopy[move] = side;
+      scores.push(aiEngine.miniMax(scenairoCopy,(side == "X")? "O":"X"));//Score will lose after one iteration
   }
-  
-  if (side == 'O'){
+
+  if (side == 'X'){
    var moveIdx = scores.indexOf(Math.max.apply(Math,scores));
   } else {
    var moveIdx = scores.indexOf(Math.min.apply(Math,scores));
@@ -306,5 +306,16 @@ gameFlow = {
 $(document).ready(function(){
  //Run the gameEngine
  gameFlow.gameReset();
+
+ /*
+ var someScenario = {
+     "c1":"O","c2":"X","c3":"O",
+     "c4":"X","c5":"O","c6":"X",
+     "c7":"","c8":"","c9":""
+ };
+ aiEngine.miniMax(someScenario,"O");
+ console.log("Ok");
+ */
+
 
 });
