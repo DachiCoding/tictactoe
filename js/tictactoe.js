@@ -33,10 +33,10 @@ HUD.update = function(msg){
 //Cubics element
 var cubics = new Object();
 cubics.elements = document.getElementsByClassName("chartunit");
-cubics.cubicStatus = { 
-		"c1":"","c2":"","c3":"", 
-		"c4":"","c5":"","c6":"", 
-		"c7":"","c8":"","c9":"" 
+cubics.cubicStatus = {
+    "c1":"","c2":"","c3":"",
+    "c4":"","c5":"","c6":"",
+    "c7":"","c8":"","c9":""
 };
 cubics.available = ["c1","c2","c3",
    		    "c4","c5","c6",
@@ -127,13 +127,14 @@ aiEngine = {
   }
   
   aiEngine.moveIndex = moveIdx;
+
   return scores[moveIdx];
 
  },
 
  "makeMove":function(){
   //Make the best move for A.I.
-  
+
   //Test gameCheck functionality
   //cubics.aiMove(cubics.available[Math.floor((Math.random() * cubics.available.length))]);
 
@@ -309,13 +310,12 @@ $(document).ready(function(){
 
  /*
  var someScenario = {
-     "c1":"O","c2":"X","c3":"O",
-     "c4":"X","c5":"O","c6":"X",
+     "c1":"X","c2":"","c3":"",
+     "c4":"","c5":"","c6":"",
      "c7":"","c8":"","c9":""
  };
  aiEngine.miniMax(someScenario,"O");
  console.log("Ok");
  */
-
 
 });
