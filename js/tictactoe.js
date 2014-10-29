@@ -312,11 +312,4 @@ $(document).ready(function(){
  //Run the gameEngine
  gameFlow.gameReset();
 
- var someScenario = {
-     "c1":"O","c2":"","c3":"",
-     "c4":"","c5":"X","c6":"X",
-     "c7":"","c8":"","c9":""
- };
- aiEngine.miniMax(someScenario,"O");
-
 });
