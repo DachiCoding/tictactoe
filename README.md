@@ -1,4 +1,4 @@
-tictactoe
-=========
+Unbeatable Tic Tac Toe A.I(Beta Version)
+By Dachi Xu (dachi.xu@gmail.com)
 
-unbeatable tic tac toe ai
+https://DachiCoding.github.com/tictactoe
